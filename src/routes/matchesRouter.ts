@@ -13,6 +13,11 @@ router.get(
     matchesController.getMatchesByRound
 )
 
+router.get(
+    "/matches/groupBy=groups/:id",
+    tokenValidation,
+    matchesController.getMatchesByGroupId
+)
 
 
 export default router
