@@ -9,3 +9,11 @@ export async function getMatchesByRound(req:Request, res:Response) {
 
     res.status(200).send(result)
 }
+
+export async function getMatchesByGroupId(req:Request, res:Response) {
+
+    const groupId = req.params.id
+    const result = await matchesService.getMatchesByGroupId(Number(groupId))
+
+    res.status(200).send(result)
+}
