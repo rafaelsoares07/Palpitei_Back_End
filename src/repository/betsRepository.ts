@@ -7,3 +7,8 @@ export async function create(dataBet:any) {
     
     return result
 }
+export async function findMatcheById(matcheId:number) {
+    const result = await prisma.matches.findUnique({where:{id:matcheId}})
+    return result
+}
+
