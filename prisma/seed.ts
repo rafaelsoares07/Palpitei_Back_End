@@ -2,6 +2,12 @@ import prisma from "../src/database/database";
 
 async function main(){
     //CRIAÇÃO DAS SELEÇÕES DA COPA 2022
+
+    await prisma.$executeRaw`TRUNCATE TABLE countries RESTART IDENTITY CASCADE`
+    await prisma.$executeRaw`TRUNCATE TABLE groups RESTART IDENTITY CASCADE`
+    await prisma.$executeRaw`TRUNCATE TABLE rounds RESTART IDENTITY CASCADE`
+    await prisma.$executeRaw`TRUNCATE TABLE matches RESTART IDENTITY CASCADE`
+
     await prisma.countries.upsert({where:{name:"Alemanha"},update:{},create:{name:"Alemanha",level:5}})
     await prisma.countries.upsert({where:{name:"Arábia Saudita"},update:{},create:{name:"Arábia Saudita",level:1}})
     await prisma.countries.upsert({where:{name:"Argentina"},update:{},create:{name:"Argentina",level:4}})
@@ -44,10 +50,14 @@ async function main(){
     await prisma.groups.upsert({where:{number:7},update:{},create:{name:"Grupo 7", number:7}})
     await prisma.groups.upsert({where:{number:8},update:{},create:{name:"Grupo 8", number:8}})
 
+    await prisma.rounds.upsert({where:{id:1},update:{},create:{name:"Rodada 1", number:1}})
+    await prisma.rounds.upsert({where:{id:2},update:{},create:{name:"Rodada 2", number:2}})
+    await prisma.rounds.upsert({where:{id:3},update:{},create:{name:"Rodada 3", number:3}})
+
     //PARTIDAS
     //Group A
     await prisma.matches.upsert({where:{id:1},update:{},create:{
-        round:1,
+        roundId:1,
         day:"20/11/20022",
         groupId:1,
         timeOneId:9,
@@ -55,7 +65,7 @@ async function main(){
         dateAndHora:new Date('2022-11-20T10:00')
     }})
     await prisma.matches.upsert({where:{id:2},update:{},create:{
-        round:1,
+        roundId:1,
         day:"21/11/20022",
         groupId:1,
         timeOneId:28,
@@ -63,7 +73,7 @@ async function main(){
         dateAndHora:new Date('2022-11-21T10:00')
     }})
     await prisma.matches.upsert({where:{id:3},update:{},create:{
-        round:2,
+        roundId:2,
         day:"25/11/20022",
         groupId:1,
         timeOneId:9,
@@ -71,7 +81,7 @@ async function main(){
         dateAndHora:new Date('2022-11-25T07:00')
     }})
     await prisma.matches.upsert({where:{id:4},update:{},create:{
-        round:2,
+        roundId:2,
         day:"25/11/20022",
         groupId:1,
         timeOneId:19,
@@ -79,7 +89,7 @@ async function main(){
         dateAndHora:new Date('2022-11-25T10:00')
     }})
     await prisma.matches.upsert({where:{id:5},update:{},create:{
-        round:3,
+        roundId:3,
         day:"29/11/20022",
         groupId:1,
         timeOneId:19,
@@ -87,7 +97,7 @@ async function main(){
         dateAndHora:new Date('2022-11-29T09:00')
     }})
     await prisma.matches.upsert({where:{id:6},update:{},create:{
-        round:3,
+        roundId:3,
         day:"29/11/20022",
         groupId:1,
         timeOneId:14,
@@ -97,7 +107,7 @@ async function main(){
 
     //Grop B
     await prisma.matches.upsert({where:{id:7},update:{},create:{
-        round:1,
+        roundId:1,
         day:"21/11/20022",
         groupId:2,
         timeOneId:20,
@@ -105,7 +115,7 @@ async function main(){
         dateAndHora:new Date('2022-11-21T07:00')
     }})
     await prisma.matches.upsert({where:{id:8},update:{},create:{
-        round:1,
+        roundId:1,
         day:"21/11/20022",
         groupId:2,
         timeOneId:16,
@@ -113,7 +123,7 @@ async function main(){
         dateAndHora:new Date('2022-11-21T13:00')
     }})
     await prisma.matches.upsert({where:{id:9},update:{},create:{
-        round:2,
+        roundId:2,
         day:"25/11/20022",
         groupId:2,
         timeOneId:25,
@@ -121,7 +131,7 @@ async function main(){
         dateAndHora:new Date('2022-11-25T04:00')
     }})
     await prisma.matches.upsert({where:{id:10},update:{},create:{
-        round:2,
+        roundId:2,
         day:"25/11/20022",
         groupId:2,
         timeOneId:20,
@@ -129,7 +139,7 @@ async function main(){
         dateAndHora:new Date('2022-11-25T13:00')
     }})
     await prisma.matches.upsert({where:{id:11},update:{},create:{
-        round:3,
+        roundId:3,
         day:"29/11/20022",
         groupId:2,
         timeOneId:21,
@@ -137,7 +147,7 @@ async function main(){
         dateAndHora:new Date('2022-11-29T13:00')
     }})
     await prisma.matches.upsert({where:{id:12},update:{},create:{
-        round:3,
+        roundId:3,
         day:"29/11/20022",
         groupId:2,
         timeOneId:25,
@@ -147,7 +157,7 @@ async function main(){
 
     //Grop C
     await prisma.matches.upsert({where:{id:13},update:{},create:{
-        round:1,
+        roundId:1,
         day:"22/11/20022",
         groupId:3,
         timeOneId:3,
@@ -155,7 +165,7 @@ async function main(){
         dateAndHora:new Date('2022-11-22T04:00')
     }})
     await prisma.matches.upsert({where:{id:14},update:{},create:{
-        round:1,
+        roundId:1,
         day:"22/11/20022",
         groupId:3,
         timeOneId:24,
@@ -163,7 +173,7 @@ async function main(){
         dateAndHora:new Date('2022-11-22T10:00')
     }})
     await prisma.matches.upsert({where:{id:15},update:{},create:{
-        round:2,
+        roundId:2,
         day:"26/11/20022",
         groupId:3,
         timeOneId:26,
@@ -171,7 +181,7 @@ async function main(){
         dateAndHora:new Date('2022-11-26T07:00')
     }})
     await prisma.matches.upsert({where:{id:16},update:{},create:{
-        round:2,
+        roundId:2,
         day:"26/11/20022",
         groupId:3,
         timeOneId:3,
@@ -179,7 +189,7 @@ async function main(){
         dateAndHora:new Date('2022-11-26T13:00')
     }})
     await prisma.matches.upsert({where:{id:17},update:{},create:{
-        round:3,
+        roundId:3,
         day:"30/11/20022",
         groupId:3,
         timeOneId:26,
@@ -187,7 +197,7 @@ async function main(){
         dateAndHora:new Date('2022-11-30T13:00')
     }})
     await prisma.matches.upsert({where:{id:18},update:{},create:{
-        round:3,
+        roundId:3,
         day:"30/11/20022",
         groupId:3,
         timeOneId:2,
@@ -197,7 +207,7 @@ async function main(){
 
     //Grop D
     await prisma.matches.upsert({where:{id:19},update:{},create:{
-        round:1,
+        roundId:1,
         day:"22/11/20022",
         groupId:4,
         timeOneId:13,
@@ -205,7 +215,7 @@ async function main(){
         dateAndHora:new Date('2022-11-22T07:00')
     }})
     await prisma.matches.upsert({where:{id:20},update:{},create:{
-        round:1,
+        roundId:1,
         day:"22/11/20022",
         groupId:4,
         timeOneId:17,
@@ -213,7 +223,7 @@ async function main(){
         dateAndHora:new Date('2022-11-22T13:00')
     }})
     await prisma.matches.upsert({where:{id:21},update:{},create:{
-        round:2,
+        roundId:2,
         day:"26/11/20022",
         groupId:4,
         timeOneId:31,
@@ -221,7 +231,7 @@ async function main(){
         dateAndHora:new Date('2022-11-26T04:00')
     }})
     await prisma.matches.upsert({where:{id:22},update:{},create:{
-        round:2,
+        roundId:2,
         day:"26/11/20022",
         groupId:4,
         timeOneId:17,
@@ -229,7 +239,7 @@ async function main(){
         dateAndHora:new Date('2022-11-26T10:00')
     }})
     await prisma.matches.upsert({where:{id:23},update:{},create:{
-        round:3,
+        roundId:3,
         day:"30/11/20022",
         groupId:4,
         timeOneId:31,
@@ -237,7 +247,7 @@ async function main(){
         dateAndHora:new Date('2022-11-30T09:00')
     }})
     await prisma.matches.upsert({where:{id:24},update:{},create:{
-        round:3,
+        roundId:3,
         day:"30/11/20022",
         groupId:4,
         timeOneId:4,
@@ -247,7 +257,7 @@ async function main(){
 
     //Grop E
     await prisma.matches.upsert({where:{id:25},update:{},create:{
-        round:1,
+        roundId:1,
         day:"23/11/20022",
         groupId:5,
         timeOneId:1,
@@ -255,7 +265,7 @@ async function main(){
         dateAndHora:new Date('2022-11-23T07:00')
     }})
     await prisma.matches.upsert({where:{id:26},update:{},create:{
-        round:1,
+        roundId:1,
         day:"23/11/20022",
         groupId:5,
         timeOneId:15,
@@ -263,7 +273,7 @@ async function main(){
         dateAndHora:new Date('2022-11-23T10:00')
     }})
     await prisma.matches.upsert({where:{id:27},update:{},create:{
-        round:2,
+        roundId:2,
         day:"27/11/20022",
         groupId:5,
         timeOneId:22,
@@ -271,7 +281,7 @@ async function main(){
         dateAndHora:new Date('2022-11-27T04:00')
     }})
     await prisma.matches.upsert({where:{id:28},update:{},create:{
-        round:2,
+        roundId:2,
         day:"27/11/20022",
         groupId:5,
         timeOneId:15,
@@ -279,7 +289,7 @@ async function main(){
         dateAndHora:new Date('2022-11-27T13:00')
     }})
     await prisma.matches.upsert({where:{id:29},update:{},create:{
-        round:3,
+        roundId:3,
         day:"01/12/20022",
         groupId:5,
         timeOneId:22,
@@ -287,7 +297,7 @@ async function main(){
         dateAndHora:new Date('2022-12-01T13:00')
     }})
     await prisma.matches.upsert({where:{id:30},update:{},create:{
-        round:3,
+        roundId:3,
         day:"01/12/20022",
         groupId:5,
         timeOneId:11,
@@ -297,7 +307,7 @@ async function main(){
 
     //Grop F
     await prisma.matches.upsert({where:{id:31},update:{},create:{
-        round:1,
+        roundId:1,
         day:"23/11/20022",
         groupId:6,
         timeOneId:23,
@@ -305,7 +315,7 @@ async function main(){
         dateAndHora:new Date('2022-11-23T04:00')
     }})
     await prisma.matches.upsert({where:{id:32},update:{},create:{
-        round:1,
+        roundId:1,
         day:"23/11/20022",
         groupId:6,
         timeOneId:5,
@@ -313,7 +323,7 @@ async function main(){
         dateAndHora:new Date('2022-11-23T13:00')
     }})
     await prisma.matches.upsert({where:{id:33},update:{},create:{
-        round:2,
+        roundId:2,
         day:"27/11/20022",
         groupId:6,
         timeOneId:5,
@@ -321,7 +331,7 @@ async function main(){
         dateAndHora:new Date('2022-11-27T07:00')
     }})
     await prisma.matches.upsert({where:{id:34},update:{},create:{
-        round:2,
+        roundId:2,
         day:"27/11/20022",
         groupId:6,
         timeOneId:12,
@@ -329,7 +339,7 @@ async function main(){
         dateAndHora:new Date('2022-11-27T10:00')
     }})
     await prisma.matches.upsert({where:{id:35},update:{},create:{
-        round:3,
+        roundId:3,
         day:"01/12/20022",
         groupId:6,
         timeOneId:12,
@@ -337,9 +347,9 @@ async function main(){
         dateAndHora:new Date('2022-12-01T09:00')
     }})
     await prisma.matches.upsert({where:{id:36},update:{},create:{
-        round:3,
+        roundId:3,
         day:"01/12/20022",
-        groupId:7,
+        groupId:6,
         timeOneId:8,
         timeTwoId:23,
         dateAndHora:new Date('2022-12-01T09:00')
@@ -347,7 +357,7 @@ async function main(){
 
     //Grop G
     await prisma.matches.upsert({where:{id:37},update:{},create:{
-        round:1,
+        roundId:1,
         day:"24/11/20022",
         groupId:7,
         timeOneId:30,
@@ -355,7 +365,7 @@ async function main(){
         dateAndHora:new Date('2022-11-24T04:00')
     }})
     await prisma.matches.upsert({where:{id:38},update:{},create:{
-        round:1,
+        roundId:1,
         day:"24/11/20022",
         groupId:7,
         timeOneId:6,
@@ -363,7 +373,7 @@ async function main(){
         dateAndHora:new Date('2022-11-24T13:00')
     }})
     await prisma.matches.upsert({where:{id:39},update:{},create:{
-        round:2,
+        roundId:2,
         day:"28/11/20022",
         groupId:7,
         timeOneId:7,
@@ -371,7 +381,7 @@ async function main(){
         dateAndHora:new Date('2022-11-28T04:00')
     }})
     await prisma.matches.upsert({where:{id:40},update:{},create:{
-        round:2,
+        roundId:2,
         day:"28/11/20022",
         groupId:7,
         timeOneId:6,
@@ -379,7 +389,7 @@ async function main(){
         dateAndHora:new Date('2022-11-28T10:00')
     }})
     await prisma.matches.upsert({where:{id:41},update:{},create:{
-        round:3,
+        roundId:3,
         day:"02/12/20022",
         groupId:7,
         timeOneId:7,
@@ -387,7 +397,7 @@ async function main(){
         dateAndHora:new Date('2022-12-02T13:00')
     }})
     await prisma.matches.upsert({where:{id:42},update:{},create:{
-        round:3,
+        roundId:3,
         day:"02/12/20022",
         groupId:7,
         timeOneId:29,
@@ -397,7 +407,7 @@ async function main(){
 
     //Grop H
     await prisma.matches.upsert({where:{id:43},update:{},create:{
-        round:1,
+        roundId:1,
         day:"24/11/20022",
         groupId:8,
         timeOneId:32,
@@ -405,7 +415,7 @@ async function main(){
         dateAndHora:new Date('2022-11-24T07:00')
     }})
     await prisma.matches.upsert({where:{id:44},update:{},create:{
-        round:1,
+        roundId:1,
         day:"24/11/20022",
         groupId:8,
         timeOneId:27,
@@ -413,7 +423,7 @@ async function main(){
         dateAndHora:new Date('2022-11-24T10:00')
     }})
     await prisma.matches.upsert({where:{id:45},update:{},create:{
-        round:2,
+        roundId:2,
         day:"28/11/20022",
         groupId:8,
         timeOneId:10,
@@ -421,7 +431,7 @@ async function main(){
         dateAndHora:new Date('2022-11-28T07:00')
     }})
     await prisma.matches.upsert({where:{id:46},update:{},create:{
-        round:2,
+        roundId:2,
         day:"28/11/20022",
         groupId:8,
         timeOneId:27,
@@ -429,7 +439,7 @@ async function main(){
         dateAndHora:new Date('2022-11-28T13:00')
     }})
     await prisma.matches.upsert({where:{id:47},update:{},create:{
-        round:3,
+        roundId:3,
         day:"02/12/20022",
         groupId:8,
         timeOneId:10,
@@ -437,7 +447,7 @@ async function main(){
         dateAndHora:new Date('2022-12-02T09:00')
     }})
     await prisma.matches.upsert({where:{id:48},update:{},create:{
-        round:3,
+        roundId:3,
         day:"02/12/20022",
         groupId:8,
         timeOneId:18,
