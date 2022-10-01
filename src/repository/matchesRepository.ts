@@ -9,11 +9,7 @@ export async function getAll() {
             matches:{
                 select:{
                     id:true,
-                    rounds:{
-                        select:{
-                            name:true
-                        }
-                    },
+                    roundId:true,
                     day:true,
                     Time1:true,
                     gameScoreTimeOne:true,
@@ -27,7 +23,6 @@ export async function getAll() {
     return result
 }
 
-
 export async function getMatchesByGroupId(groupId:number) {
 
     const result = await prisma.groups.findMany({
@@ -39,11 +34,7 @@ export async function getMatchesByGroupId(groupId:number) {
             matches:{
                 select:{
                     id:true,
-                    rounds:{
-                        select:{
-                            name:true
-                        }
-                    },
+                    roundId:true,
                     day:true,
                     Time1:true,
                     gameScoreTimeOne:true,
