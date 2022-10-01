@@ -12,3 +12,7 @@ export async function findMatcheById(matcheId:number) {
     return result
 }
 
+export async function findCountryById(countryId:number) {
+    const result = await prisma.countries.findUnique({where:{id:countryId}})
+    return result
+}
