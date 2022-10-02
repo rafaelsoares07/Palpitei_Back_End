@@ -2,7 +2,7 @@ import * as betsRepository from "../repository/betsRepository"
 
 import * as betsTypes from "../types/betsTypes"
 
-export async function createBet(dataBet:betsTypes.IBetCreate) {
+export async function createBet(dataBet:betsTypes.IBetCreate,userId:number) {
     
 
     const {matcheId,winningTime} = dataBet
@@ -20,8 +20,12 @@ export async function createBet(dataBet:betsTypes.IBetCreate) {
     if(matcheExist.timeOneId!=timeExist.id && matcheExist.timeTwoId!=timeExist.id){
         throw {type:"bad_request", message:"id do time ganhador não condiz com os times que disputaram a partida"}
     }
-    console.log(matcheExist)
-    console.log(timeExist)
+
+    const betExists = await betsRepository.findBetByUserIdAndMatcheId(matcheId,userId)
+    if(betExists){
+        throw {type:"bad_request", message:"Você já cadastrou um palpite nesse jogo"}
+    }
+
     const result = await betsRepository.create(dataBet)
 
     return result 
