@@ -16,3 +16,14 @@ export async function findCountryById(countryId:number) {
     const result = await prisma.countries.findUnique({where:{id:countryId}})
     return result
 }
+
+export async function findBetByUserIdAndMatcheId(matcheId:number,userId:number) {
+    const result = await prisma.bets.findFirst({
+        where:{
+            userId:userId,
+            matcheId:matcheId
+        }
+    })
+    return result
+}
+
