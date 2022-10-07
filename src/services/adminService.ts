@@ -5,8 +5,7 @@ import * as rolesTypes from "../types/rolesTypes"
 import * as adminRepository from "../repository/adminRepository"
 
 export async function createPermission(permission: permissionTypes.IPermissionCreate) {
-    console.log("entrou no service")
-
+    
     const permissionNameExists = await adminRepository.findPermissionByName(permission.name)
     if (permissionNameExists) {
         throw { type: "bad_request", message: "Já existe uma permissão desse tipo" }
@@ -16,9 +15,7 @@ export async function createPermission(permission: permissionTypes.IPermissionCr
         throw { type: "bad_request", message: "Já existe uma permissão com essa descrição" }
     }
 
-
     const result = await adminRepository.createPermission(permission)
-
 
     return result
 }
@@ -63,13 +60,26 @@ export async function insertResultMatche(dataResult: any, matcheId: number) {
     if (!matcheExists) {
         throw { type: "bad_request", message: "Não existe paritda com esse id" }
     }
-    if (dataResult.winningTime != matcheExists.timeOneId && dataResult.winningTime != matcheExists.timeTwoId) {
+    if (dataResult.winningTime!=undefined && dataResult.winningTime != matcheExists.timeOneId && dataResult.winningTime != matcheExists.timeTwoId) {
         throw { type: "bad_request", message: "Id do time ganhador não corresponde as times que jogaram" }
     }
-    const result = await adminRepository.updateResultMatche(dataResult, matcheId)
 
+    if(dataResult.winningTime==undefined){
+        dataResult.winningTime = null
+    }
+    const result = await adminRepository.updateResultMatche(dataResult, matcheId)
     await adminRepository.updateBetsCorrect(dataResult.winningTime, matcheExists.id)
-    await adminRepository.updateBetsIncorrect(dataResult.winningTime, matcheExists.id)
+
+    if(dataResult.winningTime==null){
+        console.log("entrou no igual")
+        await adminRepository.updateBetsIncorrectWithOutWinnerTime(matcheExists.id)
+    }
+    else if(dataResult.winningTime!=null){
+        console.log("entrou no difere")
+        await adminRepository.updateBetsIncorrect(dataResult.winningTime, matcheExists.id)
+    }
+    
+    
 
     return result
 

@@ -15,5 +15,11 @@ tokenValidation,
 betsController.createBet
 )
 
+router.get(
+"/bets/:matcheId",
+tokenValidation,
+betsController.getBetByUserIdAndMatcheId
+)
+
 
 export default router

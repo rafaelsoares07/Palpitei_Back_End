@@ -10,12 +10,8 @@ export function havePermissionAcessMiddleware(permissions:string[]){
     
         const namesPermissions =  await adminService.userPermissions(userId)
             
-        console.log(permissions)
-        console.log(namesPermissions)
-
         const hability = namesPermissions.some((el)=>permissions.includes(el))
         
-        //console.log(hability)
 
         if(!hability){
             return res.status(422).send("Você não tem permissão")

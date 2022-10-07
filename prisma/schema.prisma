@@ -26,6 +26,7 @@ model countries {
   id       Int    @id @default(autoincrement())
   name     String @unique
   level    Int
+  sigla   String
 
   matchesTimeOne matches[] @relation("TimeOne")
   matchesTimeTwo matches[] @relation("TimeTwo")
@@ -53,6 +54,7 @@ model matches {
   gameScoreTimeOne Int?
   gameScoreTimeTwo Int?
   winningTime Int?
+
   dateAndHora DateTime @db.Timestamp()
 
   bets bets[]
@@ -77,7 +79,7 @@ model bets{
   id Int @id @default(autoincrement())
   userId Int
   matcheId Int
-  winningTime Int
+  winningTime Int?
   gameScoreTimeOne Int
   gameScoreTimeTwo Int
   createAt DateTime @default(now())
