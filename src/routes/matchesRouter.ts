@@ -19,5 +19,11 @@ router.get(
     matchesController.getMatchesByGroupId
 )
 
+router.get(
+    "/matches/currentDay/:day",
+    tokenValidation,
+    matchesController.getMatchesByDay
+)
+
 
 export default router
