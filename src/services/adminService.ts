@@ -68,17 +68,9 @@ export async function insertResultMatche(dataResult: any, matcheId: number) {
         dataResult.winningTime = null
     }
     const result = await adminRepository.updateResultMatche(dataResult, matcheId)
-    await adminRepository.updateBetsCorrect(dataResult.winningTime, matcheExists.id)
+    await adminRepository.updateBetsCorrect(dataResult.winningTime, matcheExists.id,dataResult.gameScoreTimeOne,dataResult.gameScoreTimeTwo)
 
-    if(dataResult.winningTime==null){
-        console.log("entrou no igual")
-        await adminRepository.updateBetsIncorrectWithOutWinnerTime(matcheExists.id)
-    }
-    else if(dataResult.winningTime!=null){
-        console.log("entrou no difere")
-        await adminRepository.updateBetsIncorrect(dataResult.winningTime, matcheExists.id)
-    }
-    
+   await adminRepository.updateBetsIncorrect(matcheExists.id,dataResult.winningTime,dataResult.gameScoreTimeOne, dataResult.gameScoreTimeTwo)
     
 
     return result
