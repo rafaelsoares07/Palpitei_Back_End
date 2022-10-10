@@ -17,3 +17,13 @@ export async function getMatchesByGroupId(req:Request, res:Response) {
 
     res.status(200).send(result)
 }
+
+export async function getMatchesByDay(req:Request, res:Response) {
+
+    const {day} = req.params
+    const dayFormat:string = (day.split("-").join("/"))
+
+    const result = await matchesService.getMatchesByDay(dayFormat)
+
+    res.status(200).send(result)
+}
