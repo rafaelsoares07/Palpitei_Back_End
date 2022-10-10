@@ -7,6 +7,17 @@ async function main(){
     await prisma.$executeRaw`TRUNCATE TABLE groups RESTART IDENTITY CASCADE`
     await prisma.$executeRaw`TRUNCATE TABLE rounds RESTART IDENTITY CASCADE`
     await prisma.$executeRaw`TRUNCATE TABLE matches RESTART IDENTITY CASCADE`
+    await prisma.$executeRaw`TRUNCATE TABLE stadium RESTART IDENTITY CASCADE`
+
+    await prisma.stadium.upsert({where:{id:1},update:{},create:{name:"AL BAYT"}})
+    await prisma.stadium.upsert({where:{id:2},update:{},create:{name:"AL THUMAMA"}})
+    await prisma.stadium.upsert({where:{id:3},update:{},create:{name:"INTERNACIONAL KHALIFA"}})
+    await prisma.stadium.upsert({where:{id:4},update:{},create:{name:"AHMAD BIN ALI"}})
+    await prisma.stadium.upsert({where:{id:5},update:{},create:{name:"LUSAIL"}})
+    await prisma.stadium.upsert({where:{id:6},update:{},create:{name:"ESTÁDIO 974"}})
+    await prisma.stadium.upsert({where:{id:7},update:{},create:{name:"CIDADE DA EDUCAÇÃO"}})
+    await prisma.stadium.upsert({where:{id:8},update:{},create:{name:"AL JANOUB"}})
+    
 
     await prisma.countries.upsert({where:{name:"Alemanha"},update:{},create:{name:"Alemanha",level:5, sigla:"ale"}})
     await prisma.countries.upsert({where:{name:"Arábia Saudita"},update:{},create:{name:"Arábia Saudita",level:1,sigla:"ara"}})
@@ -58,401 +69,450 @@ async function main(){
     //Group A
     await prisma.matches.upsert({where:{id:1},update:{},create:{
         roundId:1,
-        day:"20/11/20022",
+        day:"20/11/2022",
         groupId:1,
         timeOneId:9,
         timeTwoId:14,
-        dateAndHora:new Date('2022-11-20T10:00')
+        dateAndHora:new Date('2022-11-20T10:00'),
+        stadiumId:1
+        
     }})
     await prisma.matches.upsert({where:{id:2},update:{},create:{
         roundId:1,
-        day:"21/11/20022",
+        day:"21/11/2022",
         groupId:1,
         timeOneId:28,
         timeTwoId:19,
-        dateAndHora:new Date('2022-11-21T10:00')
+        dateAndHora:new Date('2022-11-21T10:00'),
+        stadiumId:2
     }})
     await prisma.matches.upsert({where:{id:3},update:{},create:{
         roundId:2,
-        day:"25/11/20022",
+        day:"25/11/2022",
         groupId:1,
         timeOneId:9,
         timeTwoId:28,
-        dateAndHora:new Date('2022-11-25T07:00')
+        dateAndHora:new Date('2022-11-25T07:00'),
+        stadiumId:2
     }})
     await prisma.matches.upsert({where:{id:4},update:{},create:{
         roundId:2,
-        day:"25/11/20022",
+        day:"25/11/2022",
         groupId:1,
         timeOneId:19,
         timeTwoId:14,
-        dateAndHora:new Date('2022-11-25T10:00')
+        dateAndHora:new Date('2022-11-25T10:00'),
+        stadiumId:3
     }})
     await prisma.matches.upsert({where:{id:5},update:{},create:{
         roundId:3,
-        day:"29/11/20022",
+        day:"29/11/2022",
         groupId:1,
         timeOneId:19,
         timeTwoId:9,
-        dateAndHora:new Date('2022-11-29T09:00')
+        dateAndHora:new Date('2022-11-29T09:00'),
+        stadiumId:1
     }})
     await prisma.matches.upsert({where:{id:6},update:{},create:{
         roundId:3,
-        day:"29/11/20022",
+        day:"29/11/2022",
         groupId:1,
         timeOneId:14,
         timeTwoId:28,
-        dateAndHora:new Date('2022-11-29T09:00')
+        dateAndHora:new Date('2022-11-29T09:00'),
+        stadiumId:3
     }})
 
     //Grop B
     await prisma.matches.upsert({where:{id:7},update:{},create:{
         roundId:1,
-        day:"21/11/20022",
+        day:"21/11/2022",
         groupId:2,
         timeOneId:20,
         timeTwoId:21,
-        dateAndHora:new Date('2022-11-21T07:00')
+        dateAndHora:new Date('2022-11-21T07:00'),
+        stadiumId:3
     }})
     await prisma.matches.upsert({where:{id:8},update:{},create:{
         roundId:1,
-        day:"21/11/20022",
+        day:"21/11/2022",
         groupId:2,
         timeOneId:16,
         timeTwoId:25,
-        dateAndHora:new Date('2022-11-21T13:00')
+        dateAndHora:new Date('2022-11-21T13:00'),
+        stadiumId:4
     }})
     await prisma.matches.upsert({where:{id:9},update:{},create:{
         roundId:2,
-        day:"25/11/20022",
+        day:"25/11/2022",
         groupId:2,
         timeOneId:25,
         timeTwoId:21,
-        dateAndHora:new Date('2022-11-25T04:00')
+        dateAndHora:new Date('2022-11-25T04:00'),
+        stadiumId:4
     }})
     await prisma.matches.upsert({where:{id:10},update:{},create:{
         roundId:2,
-        day:"25/11/20022",
+        day:"25/11/2022",
         groupId:2,
         timeOneId:20,
         timeTwoId:16,
-        dateAndHora:new Date('2022-11-25T13:00')
+        dateAndHora:new Date('2022-11-25T13:00'),
+        stadiumId:1
     }})
     await prisma.matches.upsert({where:{id:11},update:{},create:{
         roundId:3,
-        day:"29/11/20022",
+        day:"29/11/2022",
         groupId:2,
         timeOneId:21,
         timeTwoId:16,
-        dateAndHora:new Date('2022-11-29T13:00')
+        dateAndHora:new Date('2022-11-29T13:00'),
+        stadiumId:2
     }})
     await prisma.matches.upsert({where:{id:12},update:{},create:{
         roundId:3,
-        day:"29/11/20022",
+        day:"29/11/2022",
         groupId:2,
         timeOneId:25,
         timeTwoId:20,
-        dateAndHora:new Date('2022-11-29T13:00')
+        dateAndHora:new Date('2022-11-29T13:00'),
+        stadiumId:4
     }})
 
     //Grop C
     await prisma.matches.upsert({where:{id:13},update:{},create:{
         roundId:1,
-        day:"22/11/20022",
+        day:"22/11/2022",
         groupId:3,
         timeOneId:3,
         timeTwoId:2,
-        dateAndHora:new Date('2022-11-22T04:00')
+        dateAndHora:new Date('2022-11-22T04:00'),
+        stadiumId:5
     }})
     await prisma.matches.upsert({where:{id:14},update:{},create:{
         roundId:1,
-        day:"22/11/20022",
+        day:"22/11/2022",
         groupId:3,
         timeOneId:24,
         timeTwoId:26,
-        dateAndHora:new Date('2022-11-22T10:00')
+        dateAndHora:new Date('2022-11-22T10:00'),
+        stadiumId:6
     }})
     await prisma.matches.upsert({where:{id:15},update:{},create:{
         roundId:2,
-        day:"26/11/20022",
+        day:"26/11/2022",
         groupId:3,
         timeOneId:26,
         timeTwoId:2,
-        dateAndHora:new Date('2022-11-26T07:00')
+        dateAndHora:new Date('2022-11-26T07:00'),
+        stadiumId:7
     }})
     await prisma.matches.upsert({where:{id:16},update:{},create:{
         roundId:2,
-        day:"26/11/20022",
+        day:"26/11/2022",
         groupId:3,
         timeOneId:3,
         timeTwoId:24,
-        dateAndHora:new Date('2022-11-26T13:00')
+        dateAndHora:new Date('2022-11-26T13:00'),
+        stadiumId:5
     }})
     await prisma.matches.upsert({where:{id:17},update:{},create:{
         roundId:3,
-        day:"30/11/20022",
+        day:"30/11/2022",
         groupId:3,
         timeOneId:26,
         timeTwoId:3,
-        dateAndHora:new Date('2022-11-30T13:00')
+        dateAndHora:new Date('2022-11-30T13:00'),
+        stadiumId:6
     }})
     await prisma.matches.upsert({where:{id:18},update:{},create:{
         roundId:3,
-        day:"30/11/20022",
+        day:"30/11/2022",
         groupId:3,
         timeOneId:2,
         timeTwoId:24,
-        dateAndHora:new Date('2022-11-30T13:00')
+        dateAndHora:new Date('2022-11-30T13:00'),
+        stadiumId:5
     }})
 
     //Grop D
     await prisma.matches.upsert({where:{id:19},update:{},create:{
         roundId:1,
-        day:"22/11/20022",
+        day:"22/11/2022",
         groupId:4,
         timeOneId:13,
         timeTwoId:31,
-        dateAndHora:new Date('2022-11-22T07:00')
+        dateAndHora:new Date('2022-11-22T07:00'),
+        stadiumId:7
     }})
     await prisma.matches.upsert({where:{id:20},update:{},create:{
         roundId:1,
-        day:"22/11/20022",
+        day:"22/11/2022",
         groupId:4,
         timeOneId:17,
         timeTwoId:4,
-        dateAndHora:new Date('2022-11-22T13:00')
+        dateAndHora:new Date('2022-11-22T13:00'),
+        stadiumId:8
     }})
     await prisma.matches.upsert({where:{id:21},update:{},create:{
         roundId:2,
-        day:"26/11/20022",
+        day:"26/11/2022",
         groupId:4,
         timeOneId:31,
         timeTwoId:4,
-        dateAndHora:new Date('2022-11-26T04:00')
+        dateAndHora:new Date('2022-11-26T04:00'),
+        stadiumId:8
     }})
     await prisma.matches.upsert({where:{id:22},update:{},create:{
         roundId:2,
-        day:"26/11/20022",
+        day:"26/11/2022",
         groupId:4,
         timeOneId:17,
         timeTwoId:13,
-        dateAndHora:new Date('2022-11-26T10:00')
+        dateAndHora:new Date('2022-11-26T10:00'),
+        stadiumId:6
     }})
     await prisma.matches.upsert({where:{id:23},update:{},create:{
         roundId:3,
-        day:"30/11/20022",
+        day:"30/11/2022",
         groupId:4,
         timeOneId:31,
         timeTwoId:17,
-        dateAndHora:new Date('2022-11-30T09:00')
+        dateAndHora:new Date('2022-11-30T09:00'),
+        stadiumId:7
     }})
     await prisma.matches.upsert({where:{id:24},update:{},create:{
         roundId:3,
-        day:"30/11/20022",
+        day:"30/11/2022",
         groupId:4,
         timeOneId:4,
         timeTwoId:13,
-        dateAndHora:new Date('2022-11-30T09:00')
+        dateAndHora:new Date('2022-11-30T09:00'),
+        stadiumId:8
     }})
 
     //Grop E
     await prisma.matches.upsert({where:{id:25},update:{},create:{
         roundId:1,
-        day:"23/11/20022",
+        day:"23/11/2022",
         groupId:5,
         timeOneId:1,
         timeTwoId:22,
-        dateAndHora:new Date('2022-11-23T07:00')
+        dateAndHora:new Date('2022-11-23T07:00'),
+        stadiumId:3
     }})
     await prisma.matches.upsert({where:{id:26},update:{},create:{
         roundId:1,
-        day:"23/11/20022",
+        day:"23/11/2022",
         groupId:5,
         timeOneId:15,
         timeTwoId:11,
-        dateAndHora:new Date('2022-11-23T10:00')
+        dateAndHora:new Date('2022-11-23T10:00'),
+        stadiumId:2
     }})
     await prisma.matches.upsert({where:{id:27},update:{},create:{
         roundId:2,
-        day:"27/11/20022",
+        day:"27/11/2022",
         groupId:5,
         timeOneId:22,
         timeTwoId:11,
-        dateAndHora:new Date('2022-11-27T04:00')
+        dateAndHora:new Date('2022-11-27T04:00'),
+        stadiumId:4
     }})
     await prisma.matches.upsert({where:{id:28},update:{},create:{
         roundId:2,
-        day:"27/11/20022",
+        day:"27/11/2022",
         groupId:5,
         timeOneId:15,
         timeTwoId:1,
-        dateAndHora:new Date('2022-11-27T13:00')
+        dateAndHora:new Date('2022-11-27T13:00'),
+        stadiumId:1
     }})
     await prisma.matches.upsert({where:{id:29},update:{},create:{
         roundId:3,
-        day:"01/12/20022",
+        day:"01/12/2022",
         groupId:5,
         timeOneId:22,
         timeTwoId:15,
-        dateAndHora:new Date('2022-12-01T13:00')
+        dateAndHora:new Date('2022-12-01T13:00'),
+        stadiumId:3
     }})
     await prisma.matches.upsert({where:{id:30},update:{},create:{
         roundId:3,
-        day:"01/12/20022",
+        day:"01/12/2022",
         groupId:5,
         timeOneId:11,
         timeTwoId:1,
-        dateAndHora:new Date('2022-12-01T13:00')
+        dateAndHora:new Date('2022-12-01T13:00'),
+        stadiumId:1
     }})
 
     //Grop F
     await prisma.matches.upsert({where:{id:31},update:{},create:{
         roundId:1,
-        day:"23/11/20022",
+        day:"23/11/2022",
         groupId:6,
         timeOneId:23,
         timeTwoId:12,
-        dateAndHora:new Date('2022-11-23T04:00')
+        dateAndHora:new Date('2022-11-23T04:00'),
+        stadiumId:1
     }})
     await prisma.matches.upsert({where:{id:32},update:{},create:{
         roundId:1,
-        day:"23/11/20022",
+        day:"23/11/2022",
         groupId:6,
         timeOneId:5,
         timeTwoId:8,
-        dateAndHora:new Date('2022-11-23T13:00')
+        dateAndHora:new Date('2022-11-23T13:00'),
+        stadiumId:4
     }})
     await prisma.matches.upsert({where:{id:33},update:{},create:{
         roundId:2,
-        day:"27/11/20022",
+        day:"27/11/2022",
         groupId:6,
         timeOneId:5,
         timeTwoId:23,
-        dateAndHora:new Date('2022-11-27T07:00')
+        dateAndHora:new Date('2022-11-27T07:00'),
+        stadiumId:2
     }})
     await prisma.matches.upsert({where:{id:34},update:{},create:{
         roundId:2,
-        day:"27/11/20022",
+        day:"27/11/2022",
         groupId:6,
         timeOneId:12,
         timeTwoId:8,
-        dateAndHora:new Date('2022-11-27T10:00')
+        dateAndHora:new Date('2022-11-27T10:00'),
+        stadiumId:3
     }})
     await prisma.matches.upsert({where:{id:35},update:{},create:{
         roundId:3,
-        day:"01/12/20022",
+        day:"01/12/2022",
         groupId:6,
         timeOneId:12,
         timeTwoId:5,
-        dateAndHora:new Date('2022-12-01T09:00')
+        dateAndHora:new Date('2022-12-01T09:00'),
+        stadiumId:4
     }})
     await prisma.matches.upsert({where:{id:36},update:{},create:{
         roundId:3,
-        day:"01/12/20022",
+        day:"01/12/2022",
         groupId:6,
         timeOneId:8,
         timeTwoId:23,
-        dateAndHora:new Date('2022-12-01T09:00')
+        dateAndHora:new Date('2022-12-01T09:00'),
+        stadiumId:2
     }})
 
     //Grop G
     await prisma.matches.upsert({where:{id:37},update:{},create:{
         roundId:1,
-        day:"24/11/20022",
+        day:"24/11/2022",
         groupId:7,
         timeOneId:30,
         timeTwoId:7,
-        dateAndHora:new Date('2022-11-24T04:00')
+        dateAndHora:new Date('2022-11-24T04:00'),
+        stadiumId:8
     }})
     await prisma.matches.upsert({where:{id:38},update:{},create:{
         roundId:1,
-        day:"24/11/20022",
+        day:"24/11/2022",
         groupId:7,
         timeOneId:6,
         timeTwoId:29,
-        dateAndHora:new Date('2022-11-24T13:00')
+        dateAndHora:new Date('2022-11-24T13:00'),
+        stadiumId:5
     }})
     await prisma.matches.upsert({where:{id:39},update:{},create:{
         roundId:2,
-        day:"28/11/20022",
+        day:"28/11/2022",
         groupId:7,
         timeOneId:7,
         timeTwoId:29,
-        dateAndHora:new Date('2022-11-28T04:00')
+        dateAndHora:new Date('2022-11-28T04:00'),
+        stadiumId:8
     }})
     await prisma.matches.upsert({where:{id:40},update:{},create:{
         roundId:2,
-        day:"28/11/20022",
+        day:"28/11/2022",
         groupId:7,
         timeOneId:6,
         timeTwoId:30,
-        dateAndHora:new Date('2022-11-28T10:00')
+        dateAndHora:new Date('2022-11-28T10:00'),
+        stadiumId:6
     }})
     await prisma.matches.upsert({where:{id:41},update:{},create:{
         roundId:3,
-        day:"02/12/20022",
+        day:"02/12/2022",
         groupId:7,
         timeOneId:7,
         timeTwoId:6,
-        dateAndHora:new Date('2022-12-02T13:00')
+        dateAndHora:new Date('2022-12-02T13:00'),
+        stadiumId:5
     }})
     await prisma.matches.upsert({where:{id:42},update:{},create:{
         roundId:3,
-        day:"02/12/20022",
+        day:"02/12/2022",
         groupId:7,
         timeOneId:29,
         timeTwoId:30,
-        dateAndHora:new Date('2022-12-02T13:00')
+        dateAndHora:new Date('2022-12-02T13:00'),
+        stadiumId:6
     }})
 
     //Grop H
     await prisma.matches.upsert({where:{id:43},update:{},create:{
         roundId:1,
-        day:"24/11/20022",
+        day:"24/11/2022",
         groupId:8,
         timeOneId:32,
         timeTwoId:10,
-        dateAndHora:new Date('2022-11-24T07:00')
+        dateAndHora:new Date('2022-11-24T07:00'),
+        stadiumId:7
     }})
     await prisma.matches.upsert({where:{id:44},update:{},create:{
         roundId:1,
-        day:"24/11/20022",
+        day:"24/11/2022",
         groupId:8,
         timeOneId:27,
         timeTwoId:18,
-        dateAndHora:new Date('2022-11-24T10:00')
+        dateAndHora:new Date('2022-11-24T10:00'),
+        stadiumId:6
     }})
     await prisma.matches.upsert({where:{id:45},update:{},create:{
         roundId:2,
-        day:"28/11/20022",
+        day:"28/11/2022",
         groupId:8,
         timeOneId:10,
         timeTwoId:18,
-        dateAndHora:new Date('2022-11-28T07:00')
+        dateAndHora:new Date('2022-11-28T07:00'),
+        stadiumId:7
     }})
     await prisma.matches.upsert({where:{id:46},update:{},create:{
         roundId:2,
-        day:"28/11/20022",
+        day:"28/11/2022",
         groupId:8,
         timeOneId:27,
         timeTwoId:32,
-        dateAndHora:new Date('2022-11-28T13:00')
+        dateAndHora:new Date('2022-11-28T13:00'),
+        stadiumId:5
     }})
     await prisma.matches.upsert({where:{id:47},update:{},create:{
         roundId:3,
-        day:"02/12/20022",
+        day:"02/12/2022",
         groupId:8,
         timeOneId:10,
         timeTwoId:27,
-        dateAndHora:new Date('2022-12-02T09:00')
+        dateAndHora:new Date('2022-12-02T09:00'),
+        stadiumId:7
     }})
     await prisma.matches.upsert({where:{id:48},update:{},create:{
         roundId:3,
-        day:"02/12/20022",
+        day:"02/12/2022",
         groupId:8,
         timeOneId:18,
         timeTwoId:32,
-        dateAndHora:new Date('2022-12-02T09:00')
+        dateAndHora:new Date('2022-12-02T09:00'),
+        stadiumId:8
     }})
 
 }
