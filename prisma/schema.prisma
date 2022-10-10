@@ -54,6 +54,7 @@ model matches {
   gameScoreTimeOne Int?
   gameScoreTimeTwo Int?
   winningTime Int?
+  stadiumId Int
 
   dateAndHora DateTime @db.Timestamp()
 
@@ -64,6 +65,7 @@ model matches {
   Time2 countries @relation("TimeTwo",fields: [timeTwoId], references: [id])
   TimeWinner countries? @relation("TimeWinner",fields: [winningTime], references: [id])
   rounds rounds @relation(fields: [roundId], references: [id])
+  Stadium stadium @relation(fields: [stadiumId], references: [id])
   
 }
 
@@ -144,4 +146,11 @@ model users_permissions1 {
   userId Int 
   
 
+}
+
+model stadium{
+  id Int @id @default(autoincrement())
+  name String
+
+  matches matches[]
 }
