@@ -39,12 +39,14 @@ export async function getMatcheById(matcheId:number) {
 
     return result
 }
-export async function updateBetsCorrect(winningTime:number, matcheId:number) {
+export async function updateBetsCorrect(winningTime:number, matcheId:number,scoreOne:number, scoreTwo:number) {
     
     const result = await prisma.bets.updateMany({
         where:{
             matcheId:matcheId,
-            winningTime:winningTime
+            winningTime:winningTime,
+            gameScoreTimeOne:scoreOne,
+            gameScoreTimeTwo:scoreTwo
         },
         data:{
             correct:true
@@ -54,34 +56,16 @@ export async function updateBetsCorrect(winningTime:number, matcheId:number) {
     
     return result
 }
-
-export async function updateBetsIncorrectWithOutWinnerTime(matcheId:number) {
+export async function updateBetsIncorrect(matcheId:number,winner:number, scoreOne:number, scoreTwo:number) {
     
     const result = await prisma.bets.updateMany({
         where:{
             matcheId:matcheId,
-            winningTime:{
-                not:null
-            }
-        },
-        data:{
-            correct:false
-        }
-
-    })
-    
-    return result
-}
-
-export async function updateBetsIncorrect(winningTime:number, matcheId:number) {
-    
-    const result = await prisma.bets.updateMany({
-        where:{
-            matcheId:matcheId,
-            OR:[{winningTime:null}, {winningTime:{
-                not:winningTime
-            }}]
-            
+            OR:[{gameScoreTimeOne:{not:scoreOne}},
+                {gameScoreTimeTwo:{not:scoreTwo}},
+                {winningTime:{not:winner}}
+            ]
+           
         },
         data:{
             correct:false
@@ -111,13 +95,13 @@ export async function findPermissionByName(permissionName:string) {
     
     return result
 }
-
 export async function findPermissionByDescription(permissionDescription:string) {
 
     const result = await prisma.permissions.findFirst({where:{description:permissionDescription}})
     
     return result
 }
+
 //CRIAÇÃO DE NOVAS ROLES
 export async function createRoles(role:rolesTypes.IRoleCreate) {
     
@@ -142,3 +126,6 @@ export async function findRoleByDescription(roleDescription:string) {
     
     return result
 }
+
+
+
